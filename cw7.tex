@@ -1,0 +1,334 @@
+\documentclass{article}
+
+%-------------------------%
+% PREAMBUŁA --------------%
+%-------------------------%
+\usepackage[utf8]{inputenc}
+\usepackage[OT4]{polski}
+\usepackage{caption}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usepackage{subcaption}
+\usepackage{tabularx}
+\usepackage{caption}
+\usepackage{array}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage[justification=centering]{caption}
+\usepackage[margin=60pt]{geometry}
+\usepackage{longtable}
+
+
+
+%\usepackage[T1]{fontenc}
+%\usepackage{amsthm}
+%\theoremstyle{plain}
+%\usepackage{enumitem}
+%\captionsetup[table]{skip=-4pt}
+%\usepackage{tabulary}
+%\usepackage{sidecap}
+%\usepackage{gensymb}
+%\usepackage{wrapfig}
+%\usepackage{lastpage}
+%\usepackage{gensymb}
+%\usepackage{lipsum}
+%\pagestyle{fancy}
+
+
+\newlength{\RoundedBoxWidth}
+\newsavebox{\GrayRoundedBox}
+\newenvironment{GrayBox}[1][\dimexpr\textwidth-4.5ex]%
+   {\setlength{\RoundedBoxWidth}{\dimexpr#1}
+    \begin{lrbox}{\GrayRoundedBox}
+       \begin{minipage}{\RoundedBoxWidth}}%
+   {   \end{minipage}
+    \end{lrbox}
+    \begin{center}
+    \begin{tikzpicture}%
+       \draw node[draw=black,fill=black!1,rounded corners,%
+             inner sep=2ex,text width=\RoundedBoxWidth]%
+             {\usebox{\GrayRoundedBox}};
+    \end{tikzpicture}
+    \end{center}}
+
+%------- Typy kolumn do ustawiania szerokości ------- %
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+
+
+
+
+
+
+
+\begin{document}
+
+%-------------------------%
+%Tabela nagłówkowa -------%
+%-------------------------%
+
+\begin{table}[h]
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+\begin{tabular}[c]{@{}l@{}}
+Wydział:\\ WFiIS\end{tabular} &
+\multicolumn{2}{l|}{\begin{tabular}[c]{@{}l@{}}
+Imię i nazwisko:\\ 1. Axel Zuziak\end{tabular}} 
+& Rok \textbf{II}         
+& Grupa \textbf{B}          
+& Zespół \textbf{03}      \\ \hline
+\textbf{\begin{tabular}[c]{@{}l@{}}
+LABOLATORIUM\\ TECHNIK \\ JĄDROWYCH\end{tabular}} &
+\multicolumn{4}{l|}{ Temat:\textbf{Dozymetria promieniowania jonizującego.}
+	 }                                                                                                                       & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}
+Nr ćwiczenia\\ \textbf{7}
+\end{tabular}} \\ \hline
+\begin{tabular}[c]{@{}c@{}}
+Data wykonania:\\ 06.05.2015
+\end{tabular} &
+\begin{tabular}[c]{@{}c@{}}
+ Data oddania:\\ 20.05.2015
+\end{tabular} &
+\begin{tabular}[c]{@{}c@{}}
+Zwrot do poprawy: \\ 
+\end{tabular}                                 
+& 
+\begin{tabular}[c]{@{}c@{}}
+Data oddania: \\ 
+\end{tabular}&
+\begin{tabular}[c]{@{}c@{}}
+Data zaliczenia:\\
+\end{tabular}& 
+\begin{tabular}[c]{@{}c@{}}
+OCENA:\\
+\end{tabular}       
+\\ & & & & & \\ \hline
+\end{tabular}
+\end{table}
+%-----Koniec tabeli------
+
+%%%%%%%%%%%% Wstęp %%%%%%%%%%%%
+\section{Wstęp}
+Celem ćwiczenia było zapoznanie się z obowiązującymi jednostkami układu SI stosowanymi w dozymetrii oraz poznanie urządzeń dozymetrycznych. W ochronie radiologicznej oraz dozymetrii stosuje się następujące wielkości:
+\begin{itemize}
+	\item \textbf{Dawka pochłonięta} to średnia energia tracona przez promieniowanie, pochłaniana przez ośrodek, przypadająca na jednostkę masy ośrodka. Historyczną, nieużywaną już jednostką jest rad (1rd). Obecnie używa się jednostki grej (1Gy = 1J/kg).
+	\item \textbf{Dawka równoważna} jest to dawka pochłonięta w narządzie wyznaczona z uwzględnieniem rodzaju i energii promieniowania. Jednostką jest siwert.
+	\item \textbf{Dawka skuteczna (efektywna)} jest to suma dawek równoważnych wyznaczonych z uzwzględnieniem czynników wagowych narządów lub tkanek.
+	\item \textbf{Moc dawki pochłoniętej} jest to przyrost dawki w jednostkowym przedziale czasu. Moc dawki jest wielkością opisującą szybkość promieniowania. [Gy/s].
+	\item \textbf{Dawka ekspozycyjna} promieniowania gamma lub $X$ zdefiniowana jest jako ładunek jonów jednego znaku wytwarzanych w jednostkowej masie powietrza. [C/kg]
+\end{itemize}
+
+Moc dawki $\dot{X}$ dla źródła punktowego można obliczyć ze wzoru:
+\begin{equation}
+	\dot{X} = \Gamma\cdot \frac{A}{l^2} \;\;\left[\frac{\text{R}}{\text{h}}\right]
+	\label{moc_rad}
+\end{equation}
+
+gdzie $\Gamma$ to stała ekspozycyjna wyrażona w [Rm$^2$/Ci h].\\
+Powyższą relację można zapisać następująco w układzie SI:
+\begin{equation}
+	\dot{X} = \Gamma_r \cdot \frac{A}{l^2} \;\;\left[\frac{\text{cGy}}{\text{h}}\right]
+	\label{moc}
+\end{equation}
+gdzie $\Gamma_r$ jest to wartość równoważna stałe ekspozycyjnej [cGy m$^2$/s GBq]
+
+
+%%%%%---------------------------- Aparatura ----------------------------%%%%%
+\section{Aparatura i wykonanie ćwiczenia}
+
+W ćwiczeniu użyto następującej aparatury:
+\begin{itemize}
+	\item \textbf{Radiometr Polon RKP 1-2}  - pomiary wykonywano na zakresach: 600, 200, 60 $\frac{\mu Sv}{h}$.
+	\item \textbf{Mikro R meter Model 19} - pomiary wykonywano na zakresach: 5000, 500, 250 $\frac{\mu Rd}{h}$.
+	\item \textbf{$^{22}Ra$} źródło o aktywności 1mCi.
+	\item \textbf{Neutron Monitor NM2} licznik neutronów.
+\end{itemize}
+Ćwiczenie rozpoczęto od wyliczenia mocy dawki pochłoniętej zgodnie z przewidywaniami teoretycznymi \ref{moc} źródła radu w odległości 1 metra. Następnie zapoznano się z działaniem i obsługą przyrządów dozymetrycznych dostępnych w pracowni. Wykonano cechowanie dwóch powyższych przyrządów mierząc nimi moc dawki od źródła radu w osłonie 0,5 Pt. Pomiary wykonywano od 30 do 185 cm z krokiem 5 cm.
+
+
+%%%%%---------------------------- Wyniki ----------------------------%%%%%
+\section{Wyniki pomiarów}
+\subsection{Cechowanie dozymetrów}
+Zmierzone wartości dla dwóch dozymetrów naniesiono na wykresy ([\ref{polon_wykres}],[\ref{model_wykres}]). Umieszczono również wartości teoretyczne wyliczone ze wzorów \ref{moc_rad} \ref{moc}. Jako że współczynnik jakości promieniowania dla promieniowania gamma wynosi 1 nasze wyniki otrzymane w Gy/h można uznać za równoważne wynikom w Sv/h. W tabelach \ref{wyniki_polon} oraz \ref{wyniki_model} przedstawiono wyniki pomiarów. 
+\begin{figure}[h!]
+	\centering	
+	\fontsize{8}{12}\selectfont % zmniejszam czcionke
+	\resizebox{0.7\textwidth}{!}{\input{polon}}		
+	\caption{Zależność równoważnika mocy dawki od odległości dla Radiometr Polon RKP 1-2.}
+	\label{polon_wykres}
+\end{figure}
+
+\begin{figure}[h!]
+	\centering	
+	\fontsize{8}{12}\selectfont % zmniejszam czcionke
+	\resizebox{0.7\textwidth}{!}{\input{model}}		
+	\caption{Zależność równoważnika mocy dawki od odległości dla Mikro R meter Model 19.}
+	\label{model_wykres}
+\end{figure}
+
+Następnie wykonano kalibrację urządzeń dozymetrycznych. Korzystając z funkcji fit programu $Gnuplot$ dopasowano prostą o równaniu $f(x) = ax + b$ do zależność pomiędzy przewidywaną dawką teoretyczną, a doświadczalną. 
+Dla dozymetru $Mikro R$ odrzucono wyniki powyżej 2000 $\frac{\mu R}{h}$, gdyż różniły się one znacząco od przewidywań teoretycznych.
+
+\begin{figure}[h!]
+	\centering	
+	\fontsize{8}{12}\selectfont % zmniejszam czcionke
+	\resizebox{0.7\textwidth}{!}{\input{model_kalibracja}}		
+	\caption{Kalibracja dozymetru Mikro R meter Model 19.}
+	\label{model_kalibracja}
+\end{figure}
+
+\begin{figure}[h!]
+	\centering	
+	\fontsize{8}{12}\selectfont % zmniejszam czcionke
+	\resizebox{0.7\textwidth}{!}{\input{polon_kalibracja}}		
+	\caption{Kalibracja dozymetru Polon RPG 1-2.}
+	\label{polon_kalibracja}
+\end{figure}
+
+
+W powyższych równaniach współczynnik $a$ nazwany jest współczynnikiem czułości detektora, natomiast $b$ jest promieniowaniem tła. Niestety w obu przypadkach nie jest on równy jedności. 
+
+\subsection{Wyznaczenie współczynnika osłabienia}
+Umieszczono źródło promieniowania w pojemnikach ołowiowych o różnej grubości i mierzono moc równoważnika dawki w odległości 30 cm. Do punktów pomiarowych dopasowano krzywą ekspotencjalną. Współczynnik $b = 0,60$ cm$^{-1}$ jest to liniowy współczynnik osłabienia
+\begin{figure}[h!]
+	\centering	
+	\fontsize{8}{12}\selectfont % zmniejszam czcionke
+	\resizebox{0.7\textwidth}{!}{\input{oslona}}		
+	\caption{Zależność równoważnika mocy dawki od grubości osłony.}
+	\label{oslona}
+\end{figure}
+\section{Wnioski}
+Obserwujemy względnie dużą zgodność wyników pomiarowych z krzywymi teoretycznymi. Moc dawki maleje wraz z kwadratem odległości od źródła. Jednak dopiero po wykonaniu kalibracji poprzez dopasowanie prostej uwidacznia się bardzo słaba dokładność szczególnie przy wysokich wartościach mocy dawki. Współczynniki czułości detektorów nie są bliskiej wartości $1$ więc nie ma podstaw do twierdzenia, że wyniki są poprawne.    
+
+Po wykonaniu ćwiczenia nasuwa się bardzo ważny wniosek iż bardzo dobrą ochroną radiologiczną jest oddalenie się od źródła promieniowania oraz stosowanie ołowianych warstw.
+
+\newpage
+\begin{table}
+\centering
+\label{wyniki_polon}
+\caption{Wyniki pomiarów wykonane przy pomocy dozymetru Polon RKP}
+	\begin{tabular}{|C{2cm}|C{4cm}|C{2cm}|} \hline
+	Odległość w [m] & Zmierzona wartość równoważnika mocy dawki [$\frac{\mu Sv}{h}$] & Wartość teoretyczna [$\frac{\mu Sv}{h}$] \\ \hline
+0,3	 & 	55	 & 	87,89 \\ \hline
+0,35	 & 	45	 & 	64,57 \\ \hline
+0,4	 & 	37	 & 	49,44 \\ \hline
+0,45	 & 	30	 & 	39,06 \\ \hline
+0,5	 & 	24	 & 	31,64 \\ \hline
+0,55	 & 	21	 & 	26,15 \\ \hline
+0,6	 & 	19	 & 	21,97 \\ \hline
+0,65	 & 	18	 & 	18,72 \\ \hline
+0,7	 & 	14	 & 	16,14 \\ \hline
+0,75	 & 	12	 & 	14,06 \\ \hline
+0,8	 & 	11	 & 	12,36 \\ \hline
+0,85	 & 	10	 & 	10,95 \\ \hline
+0,9	 & 	9	 & 	9,77 \\ \hline
+0,95	 & 	8	 & 	8,76 \\ \hline
+1	 & 	7	 & 	7,91 \\ \hline
+1,05	 & 	6	 & 	7,17 \\ \hline
+1,1	 & 	5,5	 & 	6,54 \\ \hline
+1,15	 & 	5	 & 	5,98 \\ \hline
+1,2	 & 	4,5	 & 	5,49 \\ \hline
+1,25	 & 	3,6	 & 	5,06 \\ \hline
+1,3	 & 	3,4	 & 	4,68 \\ \hline
+1,35	 & 	2,8	 & 	4,34 \\ \hline
+1,4	 & 	2,6	 & 	4,04 \\ \hline
+1,45	 & 	2,6	 & 	3,76 \\ \hline
+1,5	 & 	2,4	 & 	3,52 \\ \hline
+1,55	 & 	2,2	 & 	3,29 \\ \hline
+1,6	 & 	2,1	 & 	3,09 \\ \hline
+1,65	 & 	2,1	 & 	2,91 \\ \hline
+1,7	 & 	2,2	 & 	2,74 \\ \hline
+1,75	 & 	2,0	 & 	2,58 \\ \hline
+1,8	 & 	2,0	 & 	2,44 \\ \hline
+1,85	 & 	1,9	 & 	2,31 \\ \hline
+	\end{tabular}
+
+\end{table}
+
+
+\begin{table}
+\centering
+\label{wyniki_model}
+\caption{Wyniki pomiarów wykonane przy pomocy dozymetru Mikro R Meter.}
+	\begin{tabular}{|C{2cm}|C{4cm}|C{2cm}|} \hline
+	Odległość w [m] & Zmierzona wartość równoważnika mocy dawki [$\frac{\mu R}{h}$] & Wartość teoretyczna [$\frac{\mu R}{h}$] \\ \hline
+0.3	 & 	4200	 & 	9166.67	\\ \hline
+0.35	 & 	4100	 & 	6734.69	\\ \hline
+0.4	 & 	3500	 & 	5156.25	\\ \hline
+0.45	 & 	3200	 & 	4074.07	\\ \hline
+0.5	 & 	2400	 & 	3300.00	\\ \hline
+0.55	 & 	1900	 & 	2727.27	\\ \hline
+0.6	 & 	1700	 & 	2291.67	\\ \hline
+0.65	 & 	1500	 & 	1952.66	\\ \hline
+0.7	 & 	1400	 & 	1683.67	\\ \hline
+0.75	 & 	1250	 & 	1466.67	\\ \hline
+0.8	 & 	1100	 & 	1289.06	\\ \hline
+0.85	 & 	1000	 & 	1141.87	\\ \hline
+0.9	 & 	900	 & 	1018.52	\\ \hline
+0.95	 & 	800	 & 	914.13	\\ \hline
+1	 & 	700	 & 	825.00	\\ \hline
+1.05	 & 	700	 & 	748.30	\\ \hline
+1.1	 & 	600	 & 	681.82	\\ \hline
+1.15	 & 	500	 & 	623.82	\\ \hline
+1.2	 & 	500	 & 	572.92	\\ \hline
+1.25	 & 	490	 & 	528.00	\\ \hline
+1.3	 & 	460	 & 	488.17	\\ \hline
+1.35	 & 	420	 & 	452.67	\\ \hline
+1.4	 & 	390	 & 	420.92	\\ \hline
+1.45	 & 	350	 & 	392.39	\\ \hline
+1.5	 & 	340	 & 	366.67	\\ \hline
+1.55	 & 	320	 & 	343.39	\\ \hline
+1.6	 & 	320	 & 	322.27	\\ \hline
+1.65	 & 	300	 & 	303.03	\\ \hline
+1.7	 & 	290	 & 	285.47	\\ \hline
+1.75	 & 	270	 & 	269.39	\\ \hline
+1.8	 & 	260	 & 	254.63	\\ \hline
+1.85	 & 	250	 & 	241.05	\\ \hline
+1.9	 & 	240	 & 	228.53	\\ \hline
+		
+	\end{tabular}
+
+\end{table}
+
+
+\begin{thebibliography}{9}
+	
+	
+	\bibitem{1}
+	\url{http://nucleardata.nuclear.lu.se/toi/}
+
+	
+	\bibitem{DzK}
+	B. Dziunikowski, S.J. Kalita
+	\emph{Ćwiczenia laboratoryjne z jądrowych metod pomiarowcyh}, Wydawnictwa AGH, Kraków 1995
+	
+	%\bibitem{przybycien}
+	%Mariusz Przybycień \emph{Tablice Statystyczne}, dostęp on-line\\
+	%\url{http://home.agh.edu.pl/~mariuszp/wfiis_stat/tablice_ps_wir.pdf}
+\end{thebibliography}
+\vspace{2cm}
+
+
+
+
+
+
+
+
+\end{document}
+
+
+
+
+
+%\textsc{http://nucleardata.nuclear.lu.se/toi/}
+%do bibliografii
+
+
+
+
+
+
